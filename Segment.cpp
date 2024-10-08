@@ -230,6 +230,17 @@ void Segment::drawBeams(void (*setPixel)(int pixel, byte, byte, byte), Color (*g
 	}
 }
 
+void Segment::clearBeams(){
+	Beam* beamWalker = beamAnchor;  // initing the walker
+	Beam* beamWalker_previous = NULL; // there is no previous beam yet..
+	while( beamWalker != NULL ){ // loop thought the list of beams and move them.
+		beamWalker->disable();
+		if(beamWalker_previous == NULL) beamAnchor = beamWalker->nextBeam;  // set the previous' beam next beam to the current's beam next beam, if the current is the first use the anchor
+		else beamWalker_previous->nextBeam = beamWalker->nextBeam;
+		beamWalker = beamWalker->nextBeam;  // go to the next beam
+	}
+}
+
 void Segment::move(float dt){
 	updateBeams(dt);
 	

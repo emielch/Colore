@@ -27,9 +27,11 @@ class Beam{
 		boolean move(float dt);
 		void draw(void (*setPixel)(int pixel, byte, byte, byte), Color (*getPixel)(int));
 		boolean isActive();
+		boolean disable(){active = false;}
 		boolean justArrived();
 		void arrive();
 		boolean isNeuralMode();
+		float getPos(){return posFactor;}
 		
 		Segment *onSegment;
 		float segSpd;

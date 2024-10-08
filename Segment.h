@@ -66,6 +66,7 @@ class Segment{
 		
 		void setBeamControl(BeamControl *_beamControl);
 		Beam* setBeam(boolean dir, float spd, byte spdMode, float len, Color col);
+		void clearBeams();
 		boolean setNNBeam(boolean dir, float spd, byte spdMode, float len, Color col, int power);
 		
 		void blendSetPixel(int segPixel, Color c, void (*setPixel)(int pixel, byte, byte, byte), Color (*getPixel)(int));
