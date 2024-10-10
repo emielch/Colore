@@ -32,6 +32,7 @@ class Beam{
 		void arrive();
 		boolean isNeuralMode();
 		float getPos(){return posFactor;}
+		void setSpread(float _spread);
 		
 		Segment *onSegment;
 		float segSpd;

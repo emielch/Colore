@@ -19,6 +19,7 @@
 #define WHITE 8
 #define FIRE 9
 #define PULSATE 10
+#define SEG_GRADIENT 11
 
 #define NEURON 0
 #define SYNAPSE 1
@@ -57,6 +58,7 @@ class Segment{
 		void setFade(Color c, float spd);
 		void setFadeInOut(Color cIn, Color cOut, float inSpd, float outSpd);
 		void setGradient(Color c1, Color c2);
+		void setSegGradient(Segment *_s1,Segment *_s2);
 		void setWipe(Color c, float spd, boolean dir, float fadeLen, float accel);
 		void setFire();
 		void setPulsate(Color c, float spd);
@@ -108,6 +110,9 @@ class Segment{
 		Color e_fromColor;
 		Color e_toColor;
 		Color e_outColor;
+
+		Segment *s1;
+		Segment *s2;
 		//---
 		
 		BeamControl *beamControl;

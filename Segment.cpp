@@ -132,6 +132,12 @@ void Segment::setGradient(Color c1, Color c2){
 	e_toColor = c2;
 }
 
+void Segment::setSegGradient(Segment *_s1,Segment *_s2){
+	effectID = SEG_GRADIENT;
+	s1 = _s1;
+	s2 = _s2;
+}
+
 void Segment::setWipe(Color c, float spd, boolean dir, float fadeLen, float accel){
 	e_outSpd = constrain(accel,-0.99,0.99);
 	if(!dir) e_outSpd = -e_outSpd;
@@ -358,6 +364,16 @@ void Segment::draw(void (*setPixel)(int pixel, byte, byte, byte), Color (*getPix
 			for(int i=0; i<segLen; i++){
 				float fade = i*1./(segLen-1);
 				e_color.fade(e_fromColor, e_toColor, fade);
+				
+				blendSetPixel(i,e_color,setPixel,getPixel);
+			}
+			break;
+		}
+
+		case SEG_GRADIENT:{
+			for(int i=0; i<segLen; i++){
+				float fade = i*1./(segLen-1);
+				e_color.fade(s1->e_color, s2->e_color, fade);
 				
 				blendSetPixel(i,e_color,setPixel,getPixel);
 			}

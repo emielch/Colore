@@ -12,27 +12,28 @@ void Beam::begin(Segment *seg, boolean _dir, float spd, byte _spdMode, float len
 	mode = _mode;
 	onSegment = seg;
 	length = len;
-	spread = _spread;
 	color = col;
 	dir = _dir;
 	spdMode = _spdMode;
-	int seglen = onSegment->getLen();
-	
 	if (spdMode==PIXEL_SPD){
 		pixelSpd = spd;
-		segSpd = spd / seglen;
+		segSpd = spd / onSegment->getLen();
 	}
 	else if(spdMode==SEGMENT_SPD){
 		segSpd = spd;
 	}
-	spreadFac = (spread/2)/seglen;
+	setSpread(_spread);
 	startFac = 0 - spreadFac;
 	endFac = 1 + spreadFac;
-	
 	posFactor = ((dir == UP) ? startFac : endFac);
-	
 	// linked list pointer
 	nextBeam = NULL;
+}
+
+void Beam::setSpread(float _spread){
+	spread = _spread;
+	spreadFac = (spread/2)/onSegment->getLen();
+	endFac = 1 + spreadFac;
 }
 
 void Beam::begin(Segment *seg, boolean dir, float spd, byte spdMode, float _spread, Color col, byte _mode, int _power){
